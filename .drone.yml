@@ -1,0 +1,19 @@
+kind: pipeline
+name: aws-networking-readonly
+steps:
+  - commands:
+      - apk add git
+      - npm install @semantic-release/changelog -D
+      - npm install @semantic-release/git -D
+      - npx semantic-release@15
+    environment:
+      GITHUB_TOKEN:
+        from_secret: github_token
+    image: node:alpine
+    name: release
+trigger:
+  branch:
+    - main
+  event:
+    - push
+type: kubernetes
