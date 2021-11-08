@@ -17,9 +17,11 @@ steps:
         from_secret: github_token
     image: node:alpine
     name: release
+    when:
+      branch:
+        - main
 trigger:
-  branch:
-    - main
   event:
+    - pull_request
     - push
 type: kubernetes
