@@ -2,6 +2,12 @@ kind: pipeline
 name: aws-networking-readonly
 steps:
   - commands:
+      - terraform fmt -check
+      - terraform init
+      - terraform validate
+    image: hashicorp/terraform:1.0.9
+    name: validate
+  - commands:
       - apk add git
       - npm install @semantic-release/changelog -D
       - npm install @semantic-release/git -D
